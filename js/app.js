@@ -1,15 +1,13 @@
 const s = JSON.parse(localStorage.getItem("session"));
-if(!s) location.href="index.html";
+if (!s) location.href = "index.html";
 
 user.innerText = s.login;
 unit.innerText = s.unit;
-if(s.role!=="admin") usersTab.style.display="none";
 
 function show(id){
     document.querySelectorAll(".section").forEach(x=>x.classList.add("hidden"));
     document.getElementById(id).classList.remove("hidden");
     if(id==="registry") loadInvoices();
-    if(id==="users") loadUsers();
 }
 
 function logout(){
@@ -17,40 +15,44 @@ function logout(){
     location.href="index.html";
 }
 
-function addInvoice(){
-    const net = p_qty.value * p_price.value;
-    const vat = net * (p_vat.value/100);
+function calculate(){
+    const qty = +p_qty.value;
+    const price = +p_price.value;
+    const vatP = +p_vat.value;
+
+    const net = qty * price;
+    const vat = net * vatP / 100;
     const gross = net + vat;
 
+    netto.innerText = net.toFixed(2);
+    vat.innerText = vat.toFixed(2);
+    brutto.innerText = gross.toFixed(2);
+}
+
+function addInvoice(){
+    calculate();
     const inv = {
-        number: "FV/"+Date.now(),
-        seller: s_name.value,
+        number: "FV/" + new Date().getFullYear() + "/" + Date.now(),
         buyer: b_name.value,
-        net, vat, gross,
-        author: s.login,
+        gross: brutto.innerText,
         date: new Date().toLocaleString()
     };
 
     const list = JSON.parse(localStorage.getItem("invoices"));
     list.push(inv);
     localStorage.setItem("invoices", JSON.stringify(list));
-    alert("Faktura wystawiona");
+    alert("Faktura zapisana");
 }
 
 function loadInvoices(){
     invoiceList.innerHTML="";
     JSON.parse(localStorage.getItem("invoices")).forEach(i=>{
-        const li=document.createElement("li");
-        li.innerText=`${i.number} | ${i.buyer} | ${i.gross} PLN`;
-        invoiceList.appendChild(li);
-    });
-}
-
-function loadUsers(){
-    userList.innerHTML="";
-    JSON.parse(localStorage.getItem("users")).forEach(u=>{
-        const li=document.createElement("li");
-        li.innerText=`${u.login} – ${u.unit}`;
-        userList.appendChild(li);
+        invoiceList.innerHTML += `
+        <tr>
+            <td>${i.number}</td>
+            <td>${i.buyer}</td>
+            <td>${i.gross} PLN</td>
+            <td>${i.date}</td>
+        </tr>`;
     });
 }
