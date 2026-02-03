@@ -1,71 +1,220 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
+/* =========================
+   RESET + PODSTAWY
+========================= */
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f2f4f7;
+    color: #222;
+}
+
+/* =========================
+   LOGOWANIE
+========================= */
 .login-page {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
 }
 
 .login-box {
-    background: white;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background: #ffffff;
+    width: 320px;
+    padding: 30px 35px;
+    border-radius: 6px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
     text-align: center;
 }
 
 .login-box h1 {
-    margin-bottom: 5px;
+    margin: 0;
+    font-size: 26px;
+    color: #1e3c72;
+}
+
+.login-box p {
+    margin: 5px 0 20px;
+    color: #555;
+    font-size: 14px;
 }
 
 .login-box input {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccd2da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #1e3c72;
 }
 
 .login-box button {
     width: 100%;
-    padding: 10px;
-    background: #2a4d7c;
-    color: white;
+    padding: 11px;
+    background-color: #1e3c72;
+    color: #fff;
     border: none;
+    border-radius: 4px;
+    font-size: 15px;
     cursor: pointer;
 }
 
+.login-box button:hover {
+    background-color: #16305c;
+}
+
+#error {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #c0392b;
+}
+
+/* =========================
+   LAYOUT
+========================= */
 .sidebar {
-    width: 220px;
-    height: 100vh;
-    background: #2a4d7c;
-    color: white;
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100vh;
+    background-color: #1e3c72;
+    color: #ffffff;
 }
 
 .sidebar h2 {
+    margin: 0;
+    padding: 18px;
     text-align: center;
-    padding: 15px;
+    font-size: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar li {
-    padding: 15px;
+    padding: 14px 20px;
     cursor: pointer;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .sidebar li:hover {
-    background: #1e3b5c;
+    background-color: rgba(255,255,255,0.12);
 }
 
 .content {
-    margin-left: 240px;
-    padding: 30px;
+    margin-left: 230px;
+    padding: 30px 35px;
+}
+
+/* =========================
+   SEKCJE
+========================= */
+.section {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.section h1 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #1e3c72;
+}
+
+/* =========================
+   FORMULARZE
+========================= */
+.section input,
+.section textarea,
+.section select {
+    width: 320px;
+    max-width: 100%;
+    padding: 9px 11px;
+    margin-bottom: 12px;
+    border: 1px solid #ccd2da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.section textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.section input:focus,
+.section textarea:focus {
+    outline: none;
+    border-color: #1e3c72;
+}
+
+.section button {
+    padding: 9px 18px;
+    background-color: #1e3c72;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.section button:hover {
+    background-color: #16305c;
+}
+
+/* =========================
+   LISTY / REJESTR
+========================= */
+.section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section ul li {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e1e5eb;
+    font-size: 13px;
+}
+
+.section ul li:last-child {
+    border-bottom: none;
+}
+
+/* =========================
+   STANY
+========================= */
+.hidden {
+    display: none;
+}
+
+/* =========================
+   RESPONSYWNOŚĆ
+========================= */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
 }
