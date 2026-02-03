@@ -1,4 +1,4 @@
-if (!localStorage.getItem("users")) {
+if(!localStorage.getItem("users")){
     localStorage.setItem("users", JSON.stringify([
         {login:"admin",password:"admin123",unit:"KPP",role:"admin"},
         {login:"psp01",password:"psp123",unit:"PSP",role:"user"},
@@ -8,6 +8,6 @@ if (!localStorage.getItem("users")) {
     ]));
 }
 
-if (!localStorage.getItem("invoices")) {
+if(!localStorage.getItem("invoices")){
     localStorage.setItem("invoices", JSON.stringify([]));
 }
