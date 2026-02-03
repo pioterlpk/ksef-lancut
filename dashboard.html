@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>KSeF RP – Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>KSeF RP</h2>
+    <ul>
+        <li>Dashboard</li>
+        <li>Dokumenty</li>
+        <li>Rejestr</li>
+        <li id="adminTab">Użytkownicy</li>
+        <li onclick="logout()">Wyloguj</li>
+    </ul>
+</div>
+
+<div class="content">
+    <h1>Witaj, <span id="userName"></span></h1>
+    <p>Jednostka: <b><span id="unit"></span></b></p>
+</div>
+
+<script src="js/session.js"></script>
+</body>
+</html>
