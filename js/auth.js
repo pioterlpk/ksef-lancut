@@ -1,13 +1,14 @@
-function login(){
-    const u = login.value;
-    const p = password.value;
+document.getElementById("btnLogin").addEventListener("click", function(){
+    const login = document.getElementById("login").value.trim();
+    const password = document.getElementById("password").value.trim();
     const users = JSON.parse(localStorage.getItem("users"));
-    const user = users.find(x=>x.login===u && x.password===p);
+    const user = users.find(u=>u.login===login && u.password===password);
 
     if(!user){
-        error.innerText="Błędne dane";
+        document.getElementById("error").innerText="Nieprawidłowy login lub hasło";
         return;
     }
+
     localStorage.setItem("session", JSON.stringify(user));
-    location.href="dashboard.html";
-}
+    window.location.href="dashboard.html";
+});
