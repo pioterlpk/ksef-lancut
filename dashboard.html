@@ -13,7 +13,6 @@
         <li onclick="show('dash')">Dashboard</li>
         <li onclick="show('invoice')">Wystaw fakturę</li>
         <li onclick="show('registry')">Rejestr faktur</li>
-        <li id="usersTab" onclick="show('users')">Użytkownicy</li>
         <li onclick="logout()">Wyloguj</li>
     </ul>
 </div>
@@ -27,35 +26,67 @@
 </div>
 
 <div id="invoice" class="section hidden">
-    <h1>Wystaw fakturę VAT</h1>
+    <h1>Faktura VAT</h1>
 
-    <h3>Sprzedawca</h3>
-    <input id="s_name" placeholder="Nazwa">
-    <input id="s_nip" placeholder="NIP">
-    <input id="s_addr" placeholder="Adres">
+    <div class="invoice-grid">
+        <div>
+            <h3>Sprzedawca</h3>
+            <input id="s_name" placeholder="Nazwa">
+            <input id="s_nip" placeholder="NIP">
+            <input id="s_addr" placeholder="Adres">
+        </div>
 
-    <h3>Nabywca</h3>
-    <input id="b_name" placeholder="Nazwa">
-    <input id="b_nip" placeholder="NIP">
-    <input id="b_addr" placeholder="Adres">
+        <div>
+            <h3>Nabywca</h3>
+            <input id="b_name" placeholder="Nazwa">
+            <input id="b_nip" placeholder="NIP">
+            <input id="b_addr" placeholder="Adres">
+        </div>
+    </div>
 
-    <h3>Pozycja</h3>
-    <input id="p_name" placeholder="Nazwa usługi">
-    <input id="p_qty" type="number" placeholder="Ilość">
-    <input id="p_price" type="number" placeholder="Cena netto">
-    <input id="p_vat" type="number" placeholder="VAT %">
+    <h3>Pozycje faktury</h3>
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Ilość</th>
+                <th>Cena netto</th>
+                <th>VAT %</th>
+                <th>Netto</th>
+                <th>VAT</th>
+                <th>Brutto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input id="p_name"></td>
+                <td><input id="p_qty" type="number"></td>
+                <td><input id="p_price" type="number"></td>
+                <td><input id="p_vat" type="number" value="23"></td>
+                <td id="netto">0</td>
+                <td id="vat">0</td>
+                <td id="brutto">0</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <button onclick="addInvoice()">Wystaw fakturę</button>
+    <button onclick="calculate()">Przelicz</button>
+    <button onclick="addInvoice()">Zapisz fakturę</button>
 </div>
 
 <div id="registry" class="section hidden">
     <h1>Rejestr faktur</h1>
-    <ul id="invoiceList"></ul>
-</div>
-
-<div id="users" class="section hidden">
-    <h1>Użytkownicy</h1>
-    <ul id="userList"></ul>
+    <table class="invoice-table">
+        <thead>
+            <tr>
+                <th>Numer</th>
+                <th>Nabywca</th>
+                <th>Brutto</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody id="invoiceList"></tbody>
+    </table>
 </div>
 
 </div>
