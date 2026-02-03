@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>KSeF RP</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>KSeF RP</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="sidebar">
     <h2>KSeF RP</h2>
     <ul>
-        <li onclick="showSection('dashboard')">Dashboard</li>
-        <li onclick="showSection('create')">Wystaw dokument</li>
-        <li onclick="showSection('register')">Rejestr</li>
-        <li id="usersTab" onclick="showSection('users')">Użytkownicy</li>
+        <li onclick="show('dash')">Dashboard</li>
+        <li onclick="show('invoice')">Wystaw fakturę</li>
+        <li onclick="show('registry')">Rejestr faktur</li>
+        <li id="usersTab" onclick="show('users')">Użytkownicy</li>
         <li onclick="logout()">Wyloguj</li>
     </ul>
 </div>
 
 <div class="content">
 
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="section">
-        <h1>Dashboard</h1>
-        <p>Witaj: <b id="userName"></b></p>
-        <p>Jednostka: <b id="unit"></b></p>
-    </div>
+<div id="dash" class="section">
+    <h1>Dashboard</h1>
+    <p>Zalogowany: <b id="user"></b></p>
+    <p>Jednostka: <b id="unit"></b></p>
+</div>
 
-    <!-- WYSTAW -->
-    <div id="create" class="section hidden">
-        <h1>Wystaw dokument</h1>
-        <input id="docTitle" placeholder="Tytuł">
-        <textarea id="docDesc" placeholder="Opis"></textarea>
-        <button onclick="addDocument()">Zapisz</button>
-    </div>
+<div id="invoice" class="section hidden">
+    <h1>Wystaw fakturę VAT</h1>
 
-    <!-- REJESTR -->
-    <div id="register" class="section hidden">
-        <h1>Rejestr dokumentów</h1>
-        <ul id="docList"></ul>
-    </div>
+    <h3>Sprzedawca</h3>
+    <input id="s_name" placeholder="Nazwa">
+    <input id="s_nip" placeholder="NIP">
+    <input id="s_addr" placeholder="Adres">
 
-    <!-- UŻYTKOWNICY -->
-    <div id="users" class="section hidden">
-        <h1>Użytkownicy</h1>
-        <ul id="userList"></ul>
-    </div>
+    <h3>Nabywca</h3>
+    <input id="b_name" placeholder="Nazwa">
+    <input id="b_nip" placeholder="NIP">
+    <input id="b_addr" placeholder="Adres">
+
+    <h3>Pozycja</h3>
+    <input id="p_name" placeholder="Nazwa usługi">
+    <input id="p_qty" type="number" placeholder="Ilość">
+    <input id="p_price" type="number" placeholder="Cena netto">
+    <input id="p_vat" type="number" placeholder="VAT %">
+
+    <button onclick="addInvoice()">Wystaw fakturę</button>
+</div>
+
+<div id="registry" class="section hidden">
+    <h1>Rejestr faktur</h1>
+    <ul id="invoiceList"></ul>
+</div>
+
+<div id="users" class="section hidden">
+    <h1>Użytkownicy</h1>
+    <ul id="userList"></ul>
+</div>
 
 </div>
 
