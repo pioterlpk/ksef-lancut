@@ -1,69 +1,56 @@
-const session = JSON.parse(localStorage.getItem("session"));
-if (!session) window.location.href = "index.html";
+const s = JSON.parse(localStorage.getItem("session"));
+if(!s) location.href="index.html";
 
-document.getElementById("userName").innerText = session.login;
-document.getElementById("unit").innerText = session.unit;
+user.innerText = s.login;
+unit.innerText = s.unit;
+if(s.role!=="admin") usersTab.style.display="none";
 
-if (session.role !== "admin") {
-    document.getElementById("usersTab").style.display = "none";
-}
-
-function showSection(id) {
-    document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
+function show(id){
+    document.querySelectorAll(".section").forEach(x=>x.classList.add("hidden"));
     document.getElementById(id).classList.remove("hidden");
-
-    if (id === "register") loadDocuments();
-    if (id === "users") loadUsers();
+    if(id==="registry") loadInvoices();
+    if(id==="users") loadUsers();
 }
 
-function logout() {
+function logout(){
     localStorage.removeItem("session");
-    window.location.href = "index.html";
+    location.href="index.html";
 }
 
-/* DOKUMENTY */
-function addDocument() {
-    const title = docTitle.value;
-    const desc = docDesc.value;
+function addInvoice(){
+    const net = p_qty.value * p_price.value;
+    const vat = net * (p_vat.value/100);
+    const gross = net + vat;
 
-    if (!title || !desc) return alert("Uzupełnij dane");
-
-    const docs = JSON.parse(localStorage.getItem("documents") || "[]");
-    docs.push({
-        title,
-        desc,
-        unit: session.unit,
-        author: session.login,
+    const inv = {
+        number: "FV/"+Date.now(),
+        seller: s_name.value,
+        buyer: b_name.value,
+        net, vat, gross,
+        author: s.login,
         date: new Date().toLocaleString()
-    });
+    };
 
-    localStorage.setItem("documents", JSON.stringify(docs));
-    docTitle.value = "";
-    docDesc.value = "";
-    alert("Zapisano dokument");
+    const list = JSON.parse(localStorage.getItem("invoices"));
+    list.push(inv);
+    localStorage.setItem("invoices", JSON.stringify(list));
+    alert("Faktura wystawiona");
 }
 
-function loadDocuments() {
-    const list = document.getElementById("docList");
-    list.innerHTML = "";
-
-    const docs = JSON.parse(localStorage.getItem("documents") || "[]");
-    docs.forEach(d => {
-        const li = document.createElement("li");
-        li.innerText = `${d.date} | ${d.unit} | ${d.title}`;
-        list.appendChild(li);
+function loadInvoices(){
+    invoiceList.innerHTML="";
+    JSON.parse(localStorage.getItem("invoices")).forEach(i=>{
+        const li=document.createElement("li");
+        li.innerText=`${i.number} | ${i.buyer} | ${i.gross} PLN`;
+        invoiceList.appendChild(li);
     });
 }
 
-/* UŻYTKOWNICY */
-function loadUsers() {
-    const list = document.getElementById("userList");
-    list.innerHTML = "";
-
-    const users = JSON.parse(localStorage.getItem("users"));
-    users.forEach(u => {
-        const li = document.createElement("li");
-        li.innerText = `${u.login} – ${u.unit}`;
-        list.appendChild(li);
+function loadUsers(){
+    userList.innerHTML="";
+    JSON.parse(localStorage.getItem("users")).forEach(u=>{
+        const li=document.createElement("li");
+        li.innerText=`${u.login} – ${u.unit}`;
+        userList.appendChild(li);
     });
 }
