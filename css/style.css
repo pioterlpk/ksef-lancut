@@ -1,103 +1,23 @@
-/* =========================
-   RESET + PODSTAWY
-========================= */
-* {
-    box-sizing: border-box;
-}
-
+/* PODSTAWY */
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #f2f4f7;
-    color: #222;
+    background: #f2f4f7;
 }
 
-/* =========================
-   LOGOWANIE
-========================= */
-.login-page {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-}
-
-.login-box {
-    background: #ffffff;
-    width: 320px;
-    padding: 30px 35px;
-    border-radius: 6px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    text-align: center;
-}
-
-.login-box h1 {
-    margin: 0;
-    font-size: 26px;
-    color: #1e3c72;
-}
-
-.login-box p {
-    margin: 5px 0 20px;
-    color: #555;
-    font-size: 14px;
-}
-
-.login-box input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border: 1px solid #ccd2da;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.login-box input:focus {
-    outline: none;
-    border-color: #1e3c72;
-}
-
-.login-box button {
-    width: 100%;
-    padding: 11px;
-    background-color: #1e3c72;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-.login-box button:hover {
-    background-color: #16305c;
-}
-
-#error {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #c0392b;
-}
-
-/* =========================
-   LAYOUT
-========================= */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 230px;
     height: 100vh;
-    background-color: #1e3c72;
-    color: #ffffff;
+    position: fixed;
+    background: #1e3c72;
+    color: #fff;
 }
 
 .sidebar h2 {
-    margin: 0;
-    padding: 18px;
     text-align: center;
-    font-size: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding: 15px;
+    margin: 0;
+    border-bottom: 1px solid rgba(255,255,255,.2);
 }
 
 .sidebar ul {
@@ -109,112 +29,72 @@ body {
 .sidebar li {
     padding: 14px 20px;
     cursor: pointer;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .sidebar li:hover {
-    background-color: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,.15);
 }
 
 .content {
     margin-left: 230px;
-    padding: 30px 35px;
+    padding: 30px;
 }
 
-/* =========================
-   SEKCJE
-========================= */
 .section {
-    background: #ffffff;
-    padding: 25px 30px;
+    background: #fff;
+    padding: 25px;
     border-radius: 6px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
 }
 
-.section h1 {
-    margin-top: 0;
-    font-size: 22px;
-    color: #1e3c72;
+.hidden { display: none; }
+
+/* FAKTURA */
+.invoice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
 }
 
-/* =========================
-   FORMULARZE
-========================= */
-.section input,
-.section textarea,
-.section select {
-    width: 320px;
-    max-width: 100%;
-    padding: 9px 11px;
-    margin-bottom: 12px;
-    border: 1px solid #ccd2da;
-    border-radius: 4px;
-    font-size: 14px;
+.invoice-grid input {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 8px;
 }
 
-.section textarea {
-    min-height: 90px;
-    resize: vertical;
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 
-.section input:focus,
-.section textarea:focus {
-    outline: none;
-    border-color: #1e3c72;
+.invoice-table th,
+.invoice-table td {
+    border: 1px solid #cfd6e0;
+    padding: 8px;
+    text-align: center;
 }
 
-.section button {
-    padding: 9px 18px;
-    background-color: #1e3c72;
-    color: #ffffff;
+.invoice-table th {
+    background: #e9edf3;
+}
+
+.invoice-table input {
+    width: 100%;
+    padding: 5px;
     border: none;
-    border-radius: 4px;
-    font-size: 14px;
+    text-align: center;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: #1e3c72;
+    color: #fff;
+    border: none;
     cursor: pointer;
 }
 
-.section button:hover {
-    background-color: #16305c;
-}
-
-/* =========================
-   LISTY / REJESTR
-========================= */
-.section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.section ul li {
-    padding: 10px 12px;
-    border-bottom: 1px solid #e1e5eb;
-    font-size: 13px;
-}
-
-.section ul li:last-child {
-    border-bottom: none;
-}
-
-/* =========================
-   STANY
-========================= */
-.hidden {
-    display: none;
-}
-
-/* =========================
-   RESPONSYWNOŚĆ
-========================= */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .content {
-        margin-left: 0;
-        padding: 20px;
-    }
+button:hover {
+    background: #16305c;
 }
