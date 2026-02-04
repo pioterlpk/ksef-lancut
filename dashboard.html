@@ -2,91 +2,86 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>KSeF RP – Dashboard</title>
+<title>KSeF RP – Faktura VAT</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="sidebar">
-    <h2>KSeF RP</h2>
-    <ul>
-        <li onclick="show('dash')">Dashboard</li>
-        <li onclick="show('invoice')">Wystaw fakturę</li>
-        <li onclick="show('registry')">Rejestr faktur</li>
-        <li onclick="logout()">Wyloguj</li>
-    </ul>
+<div class="topbar">
+    KSeF RP – Krajowy System e-Faktur
+    <span onclick="logout()">Wyloguj</span>
 </div>
 
-<div class="content">
+<div class="container">
 
-<div id="dash" class="section">
-    <h1>Dashboard</h1>
-    <p>Zalogowany: <b id="user"></b></p>
-    <p>Jednostka: <b id="unit"></b></p>
+<div class="invoice">
+
+<div class="invoice-header">
+    <div>
+        <h2>Faktura VAT</h2>
+        <p>Nr faktury: <b id="invNumber"></b></p>
+    </div>
+    <div class="dates">
+        <p>Data wystawienia: <input id="issueDate" type="date"></p>
+        <p>Data sprzedaży: <input id="sellDate" type="date"></p>
+    </div>
 </div>
 
-<div id="invoice" class="section hidden">
-    <h1>Faktura VAT</h1>
+<hr>
 
-    <div class="invoice-grid">
-        <div>
-            <h3>Sprzedawca</h3>
-            <input id="s_name" placeholder="Nazwa">
-            <input id="s_nip" placeholder="NIP">
-            <input id="s_addr" placeholder="Adres">
-        </div>
-
-        <div>
-            <h3>Nabywca</h3>
-            <input id="b_name" placeholder="Nazwa">
-            <input id="b_nip" placeholder="NIP">
-            <input id="b_addr" placeholder="Adres">
-        </div>
+<div class="parties">
+    <div>
+        <h3>Sprzedawca</h3>
+        <input placeholder="Nazwa firmy" id="s_name">
+        <input placeholder="Adres" id="s_addr">
+        <input placeholder="NIP" id="s_nip">
+        <input placeholder="E-mail" id="s_mail">
+        <input placeholder="Nr konta bankowego" id="s_bank">
     </div>
 
-    <h3>Pozycje faktury</h3>
-    <table class="invoice-table">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Ilość</th>
-                <th>Cena netto</th>
-                <th>VAT %</th>
-                <th>Netto</th>
-                <th>VAT</th>
-                <th>Brutto</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input id="p_name"></td>
-                <td><input id="p_qty" type="number"></td>
-                <td><input id="p_price" type="number"></td>
-                <td><input id="p_vat" type="number" value="23"></td>
-                <td id="netto">0</td>
-                <td id="vat">0</td>
-                <td id="brutto">0</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <button onclick="calculate()">Przelicz</button>
-    <button onclick="addInvoice()">Zapisz fakturę</button>
+    <div>
+        <h3>Nabywca</h3>
+        <input placeholder="Nazwa / Imię i nazwisko" id="b_name">
+        <input placeholder="Adres" id="b_addr">
+        <input placeholder="NIP / PESEL" id="b_nip">
+        <input placeholder="E-mail" id="b_mail">
+    </div>
 </div>
 
-<div id="registry" class="section hidden">
-    <h1>Rejestr faktur</h1>
-    <table class="invoice-table">
-        <thead>
-            <tr>
-                <th>Numer</th>
-                <th>Nabywca</th>
-                <th>Brutto</th>
-                <th>Data</th>
-            </tr>
-        </thead>
-        <tbody id="invoiceList"></tbody>
+<h3>Pozycje faktury</h3>
+
+<table class="invoice-table">
+<thead>
+<tr>
+<th>Lp.</th>
+<th>Nazwa</th>
+<th>Ilość</th>
+<th>Jm</th>
+<th>Cena netto</th>
+<th>VAT %</th>
+<th>Netto</th>
+<th>VAT</th>
+<th>Brutto</th>
+</tr>
+</thead>
+<tbody id="items"></tbody>
+</table>
+
+<button onclick="addRow()">Dodaj pozycję</button>
+
+<div class="summary">
+    <table>
+        <tr><td>Razem netto</td><td id="sumNet">0.00</td></tr>
+        <tr><td>Razem VAT</td><td id="sumVat">0.00</td></tr>
+        <tr><td><b>Razem brutto</b></td><td><b id="sumGross">0.00</b></td></tr>
     </table>
+</div>
+
+<p>Sposób zapłaty: przelew</p>
+<p>Termin płatności: <input type="date" id="payDate"></p>
+
+<button onclick="saveInvoice()">Zapisz fakturę do KSeF</button>
+
 </div>
 
 </div>
