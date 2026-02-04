@@ -1,9 +1,12 @@
-if(!localStorage.getItem("users")){
-    localStorage.setItem("users", JSON.stringify([
-        {login:"admin",password:"admin",unit:"KSeF",role:"admin"}
-    ]));
-}
+localStorage.clear();
 
-if(!localStorage.getItem("invoices")){
-    localStorage.setItem("invoices", JSON.stringify([]));
-}
+localStorage.setItem("users", JSON.stringify([
+    {
+        login: "admin",
+        password: "admin",
+        unit: "KSeF",
+        role: "admin"
+    }
+]));
+
+localStorage.setItem("invoices", JSON.stringify([]));
