@@ -1,14 +1,21 @@
-document.getElementById("btnLogin").addEventListener("click", function(){
-    const login = document.getElementById("login").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const users = JSON.parse(localStorage.getItem("users"));
-    const user = users.find(u=>u.login===login && u.password===password);
+const btn = document.getElementById("btnLogin");
+if(btn){
+btn.onclick = ()=>{
+    const login = document.getElementById("login").value;
+    const pass = document.getElementById("password").value;
+    const user = JSON.parse(localStorage.getItem("users"))
+        .find(u=>u.login===login && u.password===pass);
 
     if(!user){
-        document.getElementById("error").innerText="Nieprawidłowy login lub hasło";
+        document.getElementById("error").innerText="Błędne dane";
         return;
     }
-
     localStorage.setItem("session", JSON.stringify(user));
-    window.location.href="dashboard.html";
-});
+    location.href="dashboard.html";
+};
+}
+
+function logout(){
+    localStorage.removeItem("session");
+    location.href="index.html";
+}
